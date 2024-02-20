@@ -144,71 +144,79 @@ nav li a:hover {
 			</ul>
 		</nav>
   </header>
-  <main> 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Sequential Text Game</title>
-      <style>
-        /* Add your styles here */
-      </style>
-    </head>
-    <body>
-     <img id="gameImage" src="gif8.gif" alt="Game Image">
-      <h1 id="gameText">Hello Senpai Let Me Guess Your Mind.</h1>
-      <button id="playButton" onclick="playGame()">Play Game</button>
-      
-      <script>
-        var step = 0; // to keep track of the current step in the game
     
-        function playGame() {
-          var gameTextElement = document.getElementById("gameText");
-          var gameImageElement = document.getElementById("gameImage");
-          var playButton = document.getElementById("playButton");
-    
+  <main>
+    <img id="gameImage" src="gif8.gif" alt="Game Image">
+    <h1 id="gameText">Hello Senpai Let Me Guess Your Mind.</h1>
+    <button id="playButton" onclick="playGame()">Play Game</button>
+  
+    <script>
+      var step = 0; // to keep track of the current step in the game
+  
+      function playGame() {
+        var gameTextElement = document.getElementById("gameText");
+        var gameImageElement = document.getElementById("gameImage");
+        var playButton = document.getElementById("playButton");
+  
+        // Function to simulate the text typing effect
+        function typeText(text, gifSrc) {
+          var index = 0;
+          var typingInterval = setInterval(function() {
+            gameTextElement.innerHTML += text[index];
+            index++;
+  
+            if (index === text.length) {
+              clearInterval(typingInterval);
+              // Set the GIF after text is typed
+              gameImageElement.src = gifSrc;
+            }
+          }, 50); // Adjust the typing speed (milliseconds)
+        }
+  
+        // Hide the previous text and show the next text with typing effect
+        gameTextElement.style.opacity = 0;
+        setTimeout(function() {
+          gameTextElement.innerHTML = ""; // Clear previous text
+          gameTextElement.style.opacity = 1; // Make the text visible
           // Implement your game logic based on the current step
           switch (step) {
-          
             case 0:
-              gameTextElement.innerHTML = "Think an Indian Girl Name. ";
-              gameImageElement.src = "gif1.gif";
+              typeText("Think an Indian Girl Name. ", "gif1.gif");
               break;
             case 1:
-              gameTextElement.innerHTML = "Now Think a Country Name from Last Letter of Indian Girl Name.";
-              gameImageElement.src = "gif9.gif";
+              typeText("Now Think a Country Name from Last Letter of Indian Girl Name.", "gif9.gif");
               break;
             case 2:
-              gameTextElement.innerHTML = "Now Think a Fruit Name from Last Letter of Country Name.";
-              gameImageElement.src = "gif10.gif";
+              typeText("Now Think a Fruit Name from Last Letter of Country Name.", "gif10.gif");
               break;
             case 3:
-              gameTextElement.innerHTML = "Now Think a Land Animal Name from Last Letter of Fruit Name.";
-              gameImageElement.src = "gif11.gif";
+              typeText("Now Think a Land Animal Name from Last Letter of Fruit Name.", "gif11.gif");
               break;
             case 4:
-              gameTextElement.innerHTML = "You are Thinking of Animal Named.........";
-              gameImageElement.src = "gif12.gif";
-              break; 
+              typeText("You are Thinking of Animal Named.........", "gif12.gif");
+              break;
             case 5:
               gameTextElement.innerHTML = "ELEPHANT 🐘";
               gameImageElement.src = "e1.gif";
               break;
-              
+  
             // Add more cases as needed
-    
+  
             default:
               gameImageElement.src = "gif13.gif";
               gameTextElement.innerHTML = "Thanks for playing!";
               playButton.style.display = "none"; // Hide the button after the game ends
               break;
           }
-    
           // Increment the step for the next interaction
           step++;
-        }
-      </script>
+        }, 500); // Adjust the delay before showing the next text (milliseconds)
+      }
+    </script>
+  
+  </main>
+  
+      
     
     </body>
     </html>
