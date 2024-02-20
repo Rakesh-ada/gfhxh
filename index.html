@@ -227,7 +227,42 @@ nav li a:hover {
     </section>
   </main>
   <footer>
-     <p>&copy; 2024 Let Me Guess Your Mind </p>
+      <script>
+        // Check if the 'counter' variable exists in localStorage
+        if (!localStorage.getItem('counter')) {
+            // If not, initialize it to 0
+            localStorage.setItem('counter', 0);
+        }
+
+        // Function to increment and display the counter
+        function incrementCounter() {
+            // Get the current counter value from localStorage
+            let counter = parseInt(localStorage.getItem('counter'));
+
+            // Increment the counter
+            counter++;
+
+            // Update the counter value in localStorage
+            localStorage.setItem('counter', counter);
+
+            // Display the counter on the webpage
+            document.getElementById('counter').innerText = counter;
+        }
+    </script>
+</head>
+<body>
+  
+    <p>Number of visitors: <span id="counter">0</span></p>
+    
+    <!-- Call the incrementCounter function when the page loads -->
+    <script>incrementCounter();</script>
+
+    <!-- Increment the counter when the page is clicked -->
+    <script>
+        document.addEventListener('click', function() {
+            incrementCounter();
+        });
+    </script>
   </footer>
 </body>
 </html>
